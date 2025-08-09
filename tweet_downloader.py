@@ -64,7 +64,16 @@ async def fetch_twitter_content(link_to_download):
     chrome_options.add_argument('--allow-running-insecure-content')
     chrome_options.add_argument('--disable-extensions')
 
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    path = ChromeDriverManager().install()
+
+    if os.path.isdir(path):
+        path = os.path.join(path, "chromedriver-linux64", "chromedriver")
+    elif "THIRD_PARTY_NOTICES" in path or "LICENSE" in path:
+        path = os.path.join(os.path.dirname(path), "chromedriver")
+
+    service = Service(path)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
     
     try:
         print("link_to_download:", link_to_download)
