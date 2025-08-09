@@ -81,7 +81,7 @@ async def fetch_twitter_content(link_to_download):
         try:
             video_elements = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'video')))
         except Exception:
-            print("No video was found!")
+            print("No video was found! Trying to look for pictures...")
         if video_elements:
             # Navigate to the video download site
             driver.get('https://ssstwitter.com/en')
@@ -91,10 +91,12 @@ async def fetch_twitter_content(link_to_download):
             submit_button = driver.find_element(By.ID, 'submit')
             submit_button.click()
 
-            download_links = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'result_overlay')))
+            download_links = wait.until(EC.presence_of_element_located((By.ID, 'result')))
             video_links = []
-            for link in download_links.find_elements(By.CSS_SELECTOR, '.download_link'):
+            for link in download_links.find_elements(By.CLASS_NAME, 'download_link'):
                 url = link.get_attribute('href')
+                if url is None:
+                    url = link.get_attribute('data-directurl')
                 quality = link.text.split()[-1]
                 if url is not None and "result_normal" not in str(url) and "#" not in str(url):
                     video_links.append([quality, url])

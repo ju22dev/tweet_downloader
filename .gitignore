@@ -1,1 +1,4 @@
-.env
+*.env
+*.mp4
+*.zip
+*.txt
