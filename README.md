@@ -4,7 +4,7 @@ This project enables the downloading of tweets from Twitter that include images 
 
 ## Usage
 
-1. Clone the repository.
+1. Clone the repository and make sure Google Chrome is installed on your system.
 2. Create a `.env` file in the project directory.
 3. Create a bot on Telegram using BOTFATHER.
 4. Add the following entries to the `.env` file:
@@ -24,7 +24,7 @@ CHANNEL_USERNAME = '@THE USERNAME OF A CHANNEL YOU WANT THE USER TO JOIN INORDER
 
 5. Run the script to activate the bot.
 6. Open the newly created bot on Telegram and start it using the `/start` command.
-7. Send the bot a link to download tweets that contain videos or images.
+7. Send the bot a twitter link to download tweets that contain videos or images.
 
 ## Bot Link
 
